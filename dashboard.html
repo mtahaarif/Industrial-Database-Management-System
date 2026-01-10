@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnH1zO8fGplH+2FvSZOX9z5hM1UHHjPSUYFep50uRQ5bJZC1tRaf4HyWwBzE4WbkKJclQJcZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #545864;
+            --accent-color: rgba(255, 255, 255, 0.1);
+            --text-light: #ffffff;
+            --success-bg: rgba(16, 185, 129, 0.85);
+            --error-bg: rgba(239, 68, 68, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--text-light);
+            background-attachment: fixed;
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        h1, h3 {
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            border-radius: 3px;
+        }
+
+        h3 {
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .table-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .table-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .table-button {
+            padding: 30px 20px;
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .table-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .table-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+.table-card .table-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.table-card .table-actions form {
+    grid-column: 1 / -1;
+}
+
+        .table-action {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: #ffffff;
+            position: relative;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0;
+        }
+
+        .table-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .table-action button {
+            all: unset;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .factory-button {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 25px 20px;
+            border-radius: 16px;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-column: 1 / -1;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--accent-color);
+        }
+
+        .factory-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-table, .add_record {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .add-table a,
+        .add_record a {
+            color: #93c5fd;
+            background: rgba(147, 197, 253, 0.1);
+            border: 1px dashed rgba(147, 197, 253, 0.5);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .add-table a:hover,
+        .add_record a:hover {
+            background: rgba(147, 197, 253, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .logout {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #fca5a5;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .logout:hover {
+            color: #f87171;
+            background: rgba(252, 165, 165, 0.1);
+            border-radius: 50px;
+            padding: 8px 20px;
+        }
+
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .flash-message {
+            padding: 15px 25px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            color: white;
+            animation: slideIn 0.5s ease both;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent-color);
+        }
+
+        .flash-success { background: var(--success-bg); }
+        .flash-error { background: var(--error-bg); }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%) rotateY(90deg);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+
+            h1 { font-size: 2.2rem; }
+
+            .table-button, .factory-button {
+                padding: 20px 15px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Flash messages display -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <h1>Welcome {{ session['user'] }}</h1>
+    <h3>Select a table to manage:</h3>
+
+     <!-- Inside your loop for tables -->
+<div class="button-container">
+    {% for table in tables %}
+    <div class="table-card">
+        <a href="{{ url_for('view_table', table_name=table) }}" class="table-button">
+            {{ table.replace('_', ' ').title() }}
+        </a>
+        <div class="table-actions">
+            <a href="{{ url_for('view_table', table_name=table) }}" class="table-action">
+                <i class="fas fa-eye"></i> View
+            </a>
+            <a href="{{ url_for('add_record', table_name=table) }}" class="table-action">
+                <i class="fas fa-plus"></i> Add
+            </a>
+            <a href="{{ url_for('edit_record', table_name=table) }}" class="table-action">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{{ url_for('delete_record', table_name=table) }}" class="table-action">
+                <i class="fas fa-trash"></i> Delete Record
+            </a>
+            <form action="{{ url_for('delete_table', table_name=table) }}" method="POST" style="grid-column: 1 / -1;">
+                <button type="submit" class="table-action"
+                        onclick="return confirm('Are you sure you want to delete the entire table {{ table }}? This action cannot be undone.')">
+                    <i class="fas fa-trash-alt"></i> Delete Table
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Factory Production Card -->
+    <div class="table-card">
+        <a href="{{ url_for('factory_production_selector') }}" class="table-button">
+            Factory Production
+        </a>
+        <div class="table-actions">
+            <a href="{{ url_for('factory_production_selector') }}" class="table-action">
+                <i class="fas fa-eye"></i> View
+            </a>
+            <form action="{{ url_for('delete_table', table_name='factory_production') }}" method="POST" style="grid-column: 1 / -1;">
+                <button type="submit" class="table-action"
+                        onclick="return confirm('Are you sure you want to delete Factory Production table? This cannot be undone.')">
+                    <i class="fas fa-trash-alt"></i> Delete Table
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Manage Materials Card -->
+    <div class="table-card">
+        <a href="{{ url_for('material_selector') }}" class="table-button">
+            Manage Materials
+        </a>
+        <div class="table-actions">
+            <a href="{{ url_for('material_selector') }}" class="table-action">
+                <i class="fas fa-eye"></i> View
+            </a>
+            <form action="{{ url_for('delete_table', table_name='materials') }}" method="POST" style="grid-column: 1 / -1;">
+                <button type="submit" class="table-action"
+                        onclick="return confirm('Are you sure you want to delete the Materials table? This cannot be undone.')">
+                    <i class="fas fa-trash-alt"></i> Delete Table
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+    <div class="add-table">
+        <a href="{{ url_for('add_table') }}">+ Add New Table</a>
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+    <script>
+        // Auto-hide flash messages after 5 seconds
+        setTimeout(() => {
+            const messages = document.querySelectorAll('.flash-message');
+            messages.forEach(msg => {
+                msg.style.animation = 'slideIn 0.5s ease reverse both';
+                setTimeout(() => msg.remove(), 500);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
