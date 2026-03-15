@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Metal - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("{{ url_for('static', filename='picprojlogin.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 360px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container h2 {
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+            background-color: #ecf0f1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: #34495e;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px 14px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #2980b9;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
+        }
+
+        .forgot {
+            text-align: right;
+            font-size: 13px;
+            color: #666;
+            margin-top: 6px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .forgot:hover {
+            color: #1e3c72;
+            text-decoration: underline;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #16335f;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .flash-message {
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #ff4444;
+            color: white;
+            animation: slideIn 0.5s, fadeOut 0.5s 2.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            
+            .container h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <div class="container login-section">
+        <h2>UNIVERSAL METALS</h2>
+        <div class="social-icons">
+            <a href="https://universalmetals.com.pk/" title="Website"><i class="fas fa-globe"></i></a>
+            <a href="mailto:universal.um3@gmail.com" title="Email Us"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/1234567890" title="Chat on WhatsApp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        <form method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="forgot">Forgot your password?</div>
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+</body>
+</html>

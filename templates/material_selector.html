@@ -1,0 +1,112 @@
+<!-- material_subtypes.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Material Subtype</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #545864;
+            --accent-color: rgba(255, 255, 255, 0.1);
+            --text-light: #ffffff;
+            --success-bg: rgba(16, 185, 129, 0.85);
+            --error-bg: rgba(239, 68, 68, 0.85);
+            --glass-bg: rgba(128, 128, 128, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card-button {
+            background-color: transparent;
+            color: var(--text-light);
+            padding: 10px;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .card-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .danger {
+            border-color: var(--error-bg);
+            color: #ffdddd;
+        }
+
+        .danger:hover {
+            background-color: var(--error-bg);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Material Subtype</h1>
+    <div class="cards-container">
+        {% for key, value in subtypes.items() %}
+        <div class="card">
+            <div class="card-title">{{ value }}</div>
+            <div class="card-buttons">
+                <a href="{{ url_for('view_material_combined', subtype_table=key) }}" class="card-button">View</a>
+                <a href="{{ url_for('add_record', table_name=key) }}" class="card-button">Add</a>
+                <a href="{{ url_for('edit_record', table_name=key) }}" class="card-button">Edit</a>
+                <a href="{{ url_for('delete_record', table_name=key) }}" class="card-button">Delete Record</a>
+                <form action="{{ url_for('delete_table', table_name=key) }}" method="POST">
+                    <button type="submit" class="card-button danger"
+                        onclick="return confirm('Are you sure you want to delete the entire table {{ key }}? This action cannot be undone.')">
+                        Delete Table
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

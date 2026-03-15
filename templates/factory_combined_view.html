@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subtype_name }} - Factory Production</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e3a8a;
+            --accent-color: rgba(255, 255, 255, 0.1);
+            --text-light: #ffffff;
+            --success-bg: rgba(16, 185, 129, 0.85);
+            --error-bg: rgba(239, 68, 68, 0.85);
+            --glass-bg: rgba(128, 128, 128, 0.15); /* transparent gray */
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+            color: #111827;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: #fff;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-dark);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .section-header {
+            background-color: #e5e7eb;
+            font-weight: bold;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        a.button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        a.button:active {
+            transform: translateY(2px);
+            background-color: var(--primary-dark);
+            box-shadow: none;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .column-group {
+            background-color: #f9fafb;
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 600px) {
+            table {
+                font-size: 0.9rem;
+            }
+
+            a.button {
+                font-size: 0.9rem;
+                padding: 8px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ subtype_name }} - Combined Production View</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {% for col in columns %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for value in row %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="back">
+        <a href="{{ url_for('factory_production_selector') }}" class="button">← Back to Subtype Selection</a>
+    </div>
+</body>
+</html>

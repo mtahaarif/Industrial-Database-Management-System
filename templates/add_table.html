@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Table</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button, input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .add-column-btn {
+            background-color: #007bff;
+        }
+
+        .add-column-btn:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create New Table</h2>
+        <form method="POST">
+            <label>Table Name:</label>
+            <input type="text" name="table_name" required>
+
+            <label>Columns (you can add more):</label>
+            <div id="column-fields">
+                <input type="text" name="columns[]" placeholder="Column Name" required>
+            </div>
+
+            <button type="button" class="add-column-btn" onclick="addColumn()">+ Add Column</button><br><br>
+
+            <input type="submit" value="Create Table">
+        </form>
+    </div>
+
+    <script>
+        function addColumn() {
+            const div = document.getElementById("column-fields");
+            const input = document.createElement("input");
+            input.type = "text";
+            input.name = "columns[]";
+            input.placeholder = "Column Name";
+            input.required = true;
+            input.style.marginTop = '10px';
+            div.appendChild(input);
+        }
+    </script>
+</body>
+</html>
