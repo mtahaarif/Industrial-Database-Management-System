@@ -1,7 +1,7 @@
 # Industrial Database Management System
 
 A web-based database management system built for **Universal Metals**, a wire and cable manufacturing company. The project pairs a normalized SQL Server database (designed via an EER diagram) with a Flask web application that gives non-technical staff a simple, form-driven interface for day-to-day CRUD operations — without needing to write SQL.
-
+![Login](login.jpeg)
 ## Overview
 
 Manufacturing operations at Universal Metals involve several interrelated entities — employees, factories, maintenance records, suppliers/parties, raw and finished materials, and multiple production processes (enamel copper wire, wrapping, bare strip/wire, submersible copper wire, copper tape, aluminium enamel wire). The database models these as a normalized relational schema, and the app exposes:
@@ -10,6 +10,7 @@ Manufacturing operations at Universal Metals involve several interrelated entiti
 - Dynamic creation/deletion of new tables at runtime
 - Specialized "combined views" that join a parent table (`FACTORY_PRODUCTION`, `MATERIAL`) with its subtype tables, reflecting a supertype/subtype (category) design in the ER model
 - A simple session-based login gate
+![Main Dashbaord](main-dashboard.jpeg)
 
 ## Tech Stack
 
@@ -81,6 +82,8 @@ The app discovers primary keys, foreign keys, and column lists at runtime via SQ
 - **Dynamic schema management** — create new tables (with an auto-generated `id INT IDENTITY(1,1) PRIMARY KEY` plus user-defined `NVARCHAR(255)` columns) or drop existing ones directly from the UI.
 - **Combined subtype views** — for Factory Production and Material categories, the app auto-detects the parent's primary key and the subtype's foreign key, then runs an inner join so users see the full picture (e.g. a wire's factory-production record alongside its enamel-copper-wire-specific attributes) in one table.
 - **Flash messaging** — success/error feedback rendered as animated toast-style notifications.
+![Main Dashbaord 2](main-dashboard-2.jpeg)
+![Main Dashbaord 3](main-dashboard-3.jpeg)
 
 ## Application Routes
 
