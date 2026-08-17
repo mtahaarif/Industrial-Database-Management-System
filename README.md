@@ -2,8 +2,6 @@
 
 A web-based database management system built for **Universal Metals**, a wire and cable manufacturing company. The project pairs a normalized SQL Server database (designed via an EER diagram) with a Flask web application that gives non-technical staff a simple, form-driven interface for day-to-day CRUD operations — without needing to write SQL.
 
-This was built as a Database Engineering project for the 6th Semester of a Bachelor of Computer Engineering program.
-
 ## Overview
 
 Manufacturing operations at Universal Metals involve several interrelated entities — employees, factories, maintenance records, suppliers/parties, raw and finished materials, and multiple production processes (enamel copper wire, wrapping, bare strip/wire, submersible copper wire, copper tape, aluminium enamel wire). The database models these as a normalized relational schema, and the app exposes:
@@ -156,7 +154,7 @@ This project was built for a coursework demo against a trusted local database, n
 - **No password recovery**: the "Forgot your password?" link on the login page is a placeholder.
 - **In-memory table list**: `MANUAL_TABLES` is a Python list mutated at runtime; it resets to its hardcoded values on app restart, so tables created dynamically won't reappear on the dashboard after a restart (though they still exist in the database and can be added back manually).
 
-## Academic Context
+## Context
 
 Developed as part of a Database Engineering course project, this repository demonstrates:
 - EER modeling with supertype/subtype (category) relationships
