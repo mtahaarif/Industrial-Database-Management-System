@@ -10,7 +10,7 @@ Manufacturing operations at Universal Metals involve several interrelated entiti
 - Dynamic creation/deletion of new tables at runtime
 - Specialized "combined views" that join a parent table (`FACTORY_PRODUCTION`, `MATERIAL`) with its subtype tables, reflecting a supertype/subtype (category) design in the ER model
 - A simple session-based login gate
-![Main Dashbaord](main-dashboard.jpeg)
+![Main Dashboard](main-dashboard.jpeg)
 
 ## Tech Stack
 
@@ -82,8 +82,8 @@ The app discovers primary keys, foreign keys, and column lists at runtime via SQ
 - **Dynamic schema management** — create new tables (with an auto-generated `id INT IDENTITY(1,1) PRIMARY KEY` plus user-defined `NVARCHAR(255)` columns) or drop existing ones directly from the UI.
 - **Combined subtype views** — for Factory Production and Material categories, the app auto-detects the parent's primary key and the subtype's foreign key, then runs an inner join so users see the full picture (e.g. a wire's factory-production record alongside its enamel-copper-wire-specific attributes) in one table.
 - **Flash messaging** — success/error feedback rendered as animated toast-style notifications.
-![Main Dashbaord 2](main-dashboard-2.jpeg)
-![Main Dashbaord 3](main-dashboard-3.jpeg)
+![Main Dashboard 2](main-dashboard-2.jpeg)
+![Main Dashboard 3](main-dashboard-3.jpeg)
 
 ## Application Routes
 
