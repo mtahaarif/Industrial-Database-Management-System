@@ -2,6 +2,8 @@
 
 A web-based database management system built for **Universal Metals**, a wire and cable manufacturing company. The project pairs a normalized SQL Server database (designed via an EER diagram) with a Flask web application that gives non-technical staff a simple, form-driven interface for day-to-day CRUD operations — without needing to write SQL.
 ![Login](login.jpeg)
+
+---
 ## Overview
 
 Manufacturing operations at Universal Metals involve several interrelated entities — employees, factories, maintenance records, suppliers/parties, raw and finished materials, and multiple production processes (enamel copper wire, wrapping, bare strip/wire, submersible copper wire, copper tape, aluminium enamel wire). The database models these as a normalized relational schema, and the app exposes:
